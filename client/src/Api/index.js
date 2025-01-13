@@ -1,5 +1,5 @@
-export const apiurl = "http://localhost:5000/api/v1";
-// export const apiurl = "https://focus-learn-api.vercel.app/api/v1";
+// export const apiurl = "http://localhost:5000/api/v1";
+export const apiurl = "https://new-focus-api.vercel.app/api/v1";
 
 export const registerUser = async (userData) => {
     try {
