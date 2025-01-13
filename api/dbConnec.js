@@ -1,17 +1,12 @@
-// dbConnec.js
-
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 dotenv.config();
 
+// PostgreSQL connection setup using pooler URL
 const pool = new Pool({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASS,
-    database: process.env.DB,
-    port: process.env.PORTPG || 5432,
+    connectionString: process.env.DB_URL,
     ssl: {
-        rejectUnauthorized: false,
+        rejectUnauthorized: false, // Required for Supabase
     },
 });
 
@@ -19,9 +14,8 @@ pool.connect((err) => {
     if (err) {
         console.error('Database connection error:', err.stack);
     } else {
-        console.log('Connected to database!');
+        console.log('Connected to the database through pooling!');
     }
 });
 
 module.exports = pool;
-
