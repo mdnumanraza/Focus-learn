@@ -4,16 +4,24 @@ const { Pool } = require('pg');
 const dotenv = require('dotenv');
 dotenv.config();
 
-// PostgreSQL connection setup
 const pool = new Pool({
-    host: process.env.HOST,         // e.g., db.eeonxfszsjuguzrkozmx.supabase.co
-    user: process.env.USER,         // e.g., postgres
-    password: process.env.PASS,     // Your password
-    database: process.env.DB,       // e.g., postgres
-    port: process.env.PORTPG || 5432, // Default PostgreSQL port
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASS,
+    database: process.env.DB,
+    port: process.env.PORTPG || 5432,
     ssl: {
-        rejectUnauthorized: false,  // Necessary for Supabase
+        rejectUnauthorized: false,
     },
 });
 
+pool.connect((err) => {
+    if (err) {
+        console.error('Database connection error:', err.stack);
+    } else {
+        console.log('Connected to database!');
+    }
+});
+
 module.exports = pool;
+
